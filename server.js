@@ -3,7 +3,6 @@ const { ApolloServer, gql } = require('apollo-server-express');
 require('dotenv').config();
 const cors = require('cors');
 
-
 //define the express
 const app = express();
 
@@ -12,7 +11,7 @@ app.use(express.json())
 app.use(cors());
 
 //connect to database
-require("./gateway/db/").connect();
+require("./server/database").connect();
 
 //server port 
 const { PORT } = process.env;

@@ -1,7 +1,7 @@
 const { GraphQLObjectType,GraphQLNonNull,GraphQLString} = require('graphql');
 
-const SignInType = new GraphQLObjectType({
-    name: "SignIn",
+const SignUpType = new GraphQLObjectType({
+    name: "SignUp",
     description: "New user sign in",
     fields: () => ({
         successMessage: {
@@ -10,4 +10,4 @@ const SignInType = new GraphQLObjectType({
     })
 })
 
-module.exports = SignInType
+module.exports = SignUpType

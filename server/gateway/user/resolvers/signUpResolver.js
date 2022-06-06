@@ -1,37 +1,34 @@
-const model = require("../../db/model");
-const sendSignUpEmail = require('../../services/email/sendSignUpEmail')
+const model = require("../../../database/model");
+const sendSignUpEmail = require('../../../services/email/sendSignUpEmail')
 const emailValidation = require('../Error/emailValidation')
 const CryptoJS = require("crypto-js");
-const { JWT_SECRET } = process.env
+const { ENCRYPT_KEY } = process.env
+const User = model.User;
 
-const SignIn = async(_,args) => {
-    const user = {
+const SignUp = async(_,args) => {
+
+    const user = new User({
         name : args.name,
         organizationName : args.organization_name,
         email: args.email,
         contactNumber : args.contact_number
-    }
+    });
 
-    const emailExist = await model.User.findOne({ email: user.email });
-    const contactExist = await model.User.findOne({ contactNumber : user.contactNumber})
+    const emailExist = await model.User.findOne({ email: args.email });
+    const contactExist = await model.User.findOne({ contactNumber : args.contactNumber})
 
     if(emailExist || contactExist){
         return { successMessage : 'User with given Email address or contact number already exits!'}
     }
     else{
         try{
-            const validationResponse = await emailValidation(user.email)
+            const validationResponse = await emailValidation(args.email)
                 if(validationResponse === true){
-                    const newUser =await model.User.create(user);
+                    const newUser = await user.save();
                     const id = newUser._id.toString();
-                    const hashId = CryptoJS.AES.encrypt(id, JWT_SECRET).toString();
-                    // Decrypt
-                    // const bytes  = CryptoJS.AES.decrypt(hashId,JWT_SECRET);
-                    // const originalText = bytes.toString(CryptoJS.enc.Utf8);
-                    // console.log(originalText); 
+                    const hashId = CryptoJS.AES.encrypt(id, ENCRYPT_KEY).toString();
                     const expireTime = new Date().getTime() + (15 * 60 * 1000)
                     const token = hashId + " _ " + expireTime
-                    console.log(token)
                     await sendSignUpEmail(user.email,token)
                     return{
                         successMessage : 'Verification email sent, please check inbox'
@@ -46,4 +43,6 @@ const SignIn = async(_,args) => {
     }  
 }
 
-module.exports = SignIn
+module.exports = SignUp
+
+

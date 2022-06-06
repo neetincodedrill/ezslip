@@ -1,12 +1,12 @@
-const model = require("../../db/model");
+const model = require("../../../database/model");
 
 const GetUser = async(_,args) => {
     const user = await model.User.findById(args.id)
     return {
         name : user.name,
-        organization_name : user.organization_name,
+        organization_name : user.organizationName,
         email : user.email,
-        contact_number : user.contact_number,
+        contact_number : user.contactNumber,
     }
 }
 

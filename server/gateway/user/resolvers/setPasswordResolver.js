@@ -1,4 +1,4 @@
-const model = require("../../db/model");
+const model = require("../../../database/model");
 const passwordValidate = require('../Error/passwordValidate')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
@@ -19,11 +19,12 @@ const SetPassword = async(_,args) => {
             {
               $set:{
                   password : hashPassword,
-                  isVerified : true
+                  isVerified : true,
+                  isActivated : true
               },
             }
           );
-          const token = await jwt.sign({ id : user._id},JWT_SECRET,{expiresIn: "1d"});
+          const token =  jwt.sign({ id : user._id},JWT_SECRET,{expiresIn: "1d"});
         return {
           token: token,
           id : user._id
