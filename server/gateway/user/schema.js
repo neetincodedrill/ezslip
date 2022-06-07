@@ -1,7 +1,7 @@
 const {
     GraphQLNonNull,
     GraphQLString,
-    GraphQLID
+    GraphQLID,
 } = require('graphql');
 
 const SignUpType = require('./types/signUpType')
