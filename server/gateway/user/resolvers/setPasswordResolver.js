@@ -1,10 +1,9 @@
-const model = require("../../../database/model");
-const passwordValidate = require('../Error/passwordValidate')
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
-const { JWT_SECRET } = process.env;
+import { model } from "../../../database/model";
+import passwordValidate from '../Error/passwordValidate';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
 
-const SetPassword = async(_,args) => {
+export const SetPassword = async(_,args) => {
     const password = args.password;
     const validationResponse = await passwordValidate(password)
   
@@ -45,5 +44,3 @@ const SetPassword = async(_,args) => {
       }
     }   
 }
-
-module.exports = SetPassword

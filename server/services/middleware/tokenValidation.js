@@ -1,10 +1,9 @@
-const { JWT_SECRET } = process.env;
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken'
 
-const tokenValidation = async(token) => {
+export const tokenValidation = async(token) => {
     if(token){
         try{
-           return jwt.verify(token,JWT_SECRET)
+           return jwt.verify(token,process.env.JWT_SECRET)
         }catch(err){
            return {
                error : true,
@@ -14,4 +13,3 @@ const tokenValidation = async(token) => {
     }
 }
 
-module.exports = tokenValidation

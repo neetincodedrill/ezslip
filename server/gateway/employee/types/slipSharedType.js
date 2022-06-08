@@ -1,11 +1,9 @@
-const { GraphQLObjectType,GraphQLNonNull,GraphQLString } = require('graphql');
+import { GraphQLObjectType,GraphQLNonNull,GraphQLString } from 'graphql';
 
-const SlipShared = new GraphQLObjectType({
+export const SlipSharedType = new GraphQLObjectType({
     name : 'Slip_Shared',
     description : 'Employee slip shared',
     fields: () => ({
         message : { type: new GraphQLNonNull(GraphQLString)}
     })
 })
-
-module.exports = SlipShared

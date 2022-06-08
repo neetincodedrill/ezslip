@@ -1,8 +1,8 @@
-const model = require("../../../database/model");
+import { model } from "../../../database/model"
 
-const DeleteEmployee = async(_,args,context) => {
-     const id = args.id;
-     await model.Employee.findByIdAndUpdate(
+export const DeleteEmployee = async(_,args,context) => {
+    const id = args.id;
+    await model.Employee.findByIdAndUpdate(
         {_id: id },
         {
           $set:{
@@ -14,5 +14,3 @@ const DeleteEmployee = async(_,args,context) => {
         message : 'Employee deleted'
     }
 }
-
-module.exports = DeleteEmployee

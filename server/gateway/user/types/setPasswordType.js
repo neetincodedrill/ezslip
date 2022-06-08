@@ -1,6 +1,6 @@
-const { GraphQLObjectType,GraphQLNonNull,GraphQLString,GraphQLID} = require('graphql');
+import { GraphQLObjectType,GraphQLNonNull,GraphQLString,GraphQLID} from 'graphql';
 
-const SetPasswordType = new GraphQLObjectType({
+export const SetPasswordType = new GraphQLObjectType({
     name: "Set_Password",
     description: "Set password after user verification",
     fields: () => ({
@@ -9,5 +9,3 @@ const SetPasswordType = new GraphQLObjectType({
         message: { type: GraphQLString}
     })
 })
-
-module.exports = SetPasswordType

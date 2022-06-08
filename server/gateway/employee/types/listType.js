@@ -1,7 +1,6 @@
-const { GraphQLObjectType,GraphQLNonNull,GraphQLString,GraphQLInt} = require('graphql');
+import { GraphQLObjectType,GraphQLNonNull,GraphQLString,GraphQLInt} from 'graphql';
 
-
-const GetType = new GraphQLObjectType({
+export const ListType = new GraphQLObjectType({
     name : 'Get_Details',
     description : 'Get all employees with specific usedId',
     fields: () => ({
@@ -13,4 +12,3 @@ const GetType = new GraphQLObjectType({
     })
 })
 
-module.exports = GetType

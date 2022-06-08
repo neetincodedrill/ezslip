@@ -1,6 +1,6 @@
-const { GraphQLObjectType,GraphQLString,GraphQLNonNull} = require('graphql');
+import { GraphQLObjectType,GraphQLString,GraphQLNonNull} from 'graphql';
 
-const UserVerificationType = new GraphQLObjectType({
+export const UserVerificationType = new GraphQLObjectType({
     name: "Verification",
     description: "User Verification",
     fields: () => ({
@@ -8,4 +8,3 @@ const UserVerificationType = new GraphQLObjectType({
     })
 })
 
-module.exports = UserVerificationType

@@ -1,6 +1,6 @@
-const model = require("../../../database/model");
+import { model } from "../../../database/model";
 
-const Update = async(_,args,context) => {
+export const UpdateEmployee = async(_,args,context) => {
     await model.Employee.findByIdAndUpdate(
         {_id: args.id },
         {
@@ -11,5 +11,3 @@ const Update = async(_,args,context) => {
         message : 'Employee Details Updated'
     }
 }
-
-module.exports = Update

@@ -1,6 +1,6 @@
-const contactEmail  = require('../../../services/email/contactEmail')
+import { contactEmail } from '../../../services/email/contactEmail'
 
-const Contact = async(_,args) => { 
+export const Contact = async(_,args) => { 
     const user = {
     name : args.name,
     organization_name : args.organization_name,
@@ -11,5 +11,3 @@ const Contact = async(_,args) => {
     const email = await contactEmail(user)
     return email
 }
-
-module.exports = Contact

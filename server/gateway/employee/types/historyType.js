@@ -1,6 +1,6 @@
-const { GraphQLObjectType,GraphQLNonNull,GraphQLString,GraphQLInt} = require('graphql')
+import { GraphQLObjectType,GraphQLNonNull,GraphQLString,GraphQLInt} from 'graphql';
 
-const History = new GraphQLObjectType({
+export const HistoryType = new GraphQLObjectType({
     name : 'Employee_History_Details',
     description : 'History details of employee',
     fields: () => ({
@@ -11,5 +11,3 @@ const History = new GraphQLObjectType({
         lastEdition : { type: new GraphQLNonNull(GraphQLString)}
     })
 })
-
-module.exports =  History

@@ -1,9 +1,7 @@
-const nodemailer = require('nodemailer')
-const { user_email, user_password } = process.env;
-const contactTemplate  = require('./email-templates/contactTemplate');
-const { admin_email } = process.env;
+import  nodemailer from 'nodemailer';
+import  { contactTemplate } from './email-templates/contactTemplate';
 
-const contactEmail = async(user) => {
+export const contactEmail = async(user) => {
     const name = user.name;
     const organization_name = user.organization_name;
     const email = user.email;
@@ -18,15 +16,15 @@ const contactEmail = async(user) => {
         service:'gmail',
         auth:
         {
-        user: user_email,
-        pass: user_password
+        user: process.env.user_email,
+        pass: process.env.user_password
         }
     });
 
     //step 2
     var mailOptions={
-        from:user_email,
-        to:admin_email,
+        from:process.env.user_email,
+        to:process.env.admin_email,
         subject:'Contact information',
         html: templateData.toString()
     };
@@ -45,4 +43,3 @@ const contactEmail = async(user) => {
     }
 }
 
-module.exports  = contactEmail

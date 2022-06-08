@@ -1,6 +1,6 @@
-const model = require("../../../database/model");
+import { model } from "../../../database/model"
 
-const SlipShared = async(_,args,context) => {
+export const SlipShared = async(_,args,context) => {
     const todayDate = new Date();
     const dd = todayDate.getDate();
     const mm = todayDate.getMonth()+1; 
@@ -27,5 +27,3 @@ const SlipShared = async(_,args,context) => {
         message :  'Employee slip shared' 
     }
 }
-
-module.exports = SlipShared;

@@ -1,9 +1,8 @@
-const model = require("../../../database/model");
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt')
-const { JWT_SECRET } = process.env;
+import { model } from "../../../database/model";
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
-const Login = async(_,args) => {
+export const Login = async(_,args) => {
     const email = args.email;
     const password = args.password;
 
@@ -19,12 +18,9 @@ const Login = async(_,args) => {
             message : 'Password is incorrect'
         }
     }
-
     const token =  jwt.sign({id : user._id},JWT_SECRET,{ expiresIn: "1d" });
     return {
         id : user._id,
         token : token
     }
 }
-
-module.exports = Login

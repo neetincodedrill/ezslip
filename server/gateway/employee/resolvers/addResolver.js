@@ -1,10 +1,10 @@
-const model = require("../../../database/model");
-const userEmployee = model.Employee;
+import { model } from "../../../database/model";
+const Employee = model.Employee;
 
-const Add = async(_,args,context) => {
+export const AddEmployee = async(_,args,context) => {
     const userId = context.user;
 
-    const employee = new userEmployee({
+    const employee = new Employee({
         userId : userId,
         firstName : args.firstName,
         lastName : args.lastName,
@@ -33,5 +33,3 @@ const Add = async(_,args,context) => {
        throw new Error(error);
     }
 }
-
-module.exports = Add

@@ -1,22 +1,18 @@
-const {
-    GraphQLNonNull,
-    GraphQLString,
-    GraphQLID,
-} = require('graphql');
+import { GraphQLNonNull,GraphQLString,GraphQLID } from 'graphql';
 
-const SignUpType = require('./types/signUpType')
-const SetPasswordType = require('./types/setPasswordType')
-const GetUserType = require('./types/getuserType')
-const LoginType = require('./types/loginType')
-const UserVerificationType = require('./types/userVerificationType')
+import { SignUpType } from './types/signUpType';
+import { SetPasswordType } from './types/setPasswordType';
+import { GetUserType } from './types/getuserType';
+import { LoginType } from './types/loginType';
+import { UserVerificationType } from './types/userVerificationType';
 
-const SignUp  = require('./resolvers/signUpResolver');
-const SetPassword = require('./resolvers/setPasswordResolver');
-const GetUser = require('./resolvers/getUserResolver')
-const Login = require('./resolvers/loginResolver')
-const UserVerification = require('./resolvers/userVerificationResolver')
+import { SignUp }  from './resolvers/signUpResolver';
+import { SetPassword } from './resolvers/setPasswordResolver';
+import { GetUser } from './resolvers/getUserResolver'
+import { Login } from './resolvers/loginResolver'
+import { UserVerification } from './resolvers/userVerificationResolver'
 
-const userQuery = {
+export const userQuery = {
     getUser: {
         type : GetUserType,
         args: {
@@ -34,7 +30,7 @@ const userQuery = {
     }
 }
 
-const userMutation = {
+export const userMutation = {
     signUp : {
         type: SignUpType,
         description: "New user signin",
@@ -65,5 +61,3 @@ const userMutation = {
         resolve : Login
     }
 }
-
-module.exports = { userQuery,userMutation }

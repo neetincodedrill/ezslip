@@ -1,6 +1,6 @@
 
 
-const emailVaidation = async(email) => {
+export const emailValidation = async(email) => {
     const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     if (email.match(validRegex)){
         return true;
@@ -8,5 +8,3 @@ const emailVaidation = async(email) => {
         return false;
       }
 }
-
-module.exports = emailVaidation

@@ -1,47 +1,43 @@
-const nodemailer = require('nodemailer')
-const { user_email, user_password } = process.env;
-const signUpTemplate  = require('./email-templates/signUpTemplate');
-const url = 'https://blog.pusher.com/handling-authentication-in-graphql-jwt/'
-const templateData = signUpTemplate(url);
+import nodemailer from 'nodemailer';
+import { signUpTemplate } from './email-templates/signUpTemplate';
 
-
-const sendSignUpEmail = async(email) => {
+export const sendSignUpEmail = async(email) => {
+    const url = 'https://blog.pusher.com/handling-authentication-in-graphql-jwt/'
+    const templateData =  signUpTemplate(url);
         //step 1
     var transporter= nodemailer.createTransport(
         {
         service:'gmail',
         auth:
         {
-        user: user_email,
-        pass: user_password
+        user: process.env.user_email,
+        pass: process.env.user_password
         }
     });
 
     //step 2
     var mailOptions={
-        from:user_email,
+        from:process.env.user_email,
         to:email,
         subject:'Verify Your Email Address',
         html: templateData.toString()
     };
 
     //step 3  
-     transporter.sendMail(mailOptions,function(error,info)
-    {
-        if(error){
-            return{
-                successMessage: 'Technical Issue!, Please click on resend for verify your Email.',
-            }
+    const emailSend =  await transporter.sendMail(mailOptions)
+    console.log(emailSend)
+    if(!emailSend){
+        return {
+            successMessage: 'Technical Issue!, Please click on resend for verify your Email.',
         }
-        else{
-            return{
-                successMessage: `Verification email sent to: ${email}`
-            }
+    }
+    else{
+        return { 
+            successMessage: `Verification email sent to: ${email}`
         }
-    });
+    }
 }
 
-module.exports  = sendSignUpEmail
 
 
     

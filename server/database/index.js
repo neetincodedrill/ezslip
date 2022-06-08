@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
-const { DB } = process.env;
+import mongoose from 'mongoose';
 
 exports.connect = () => {
     //connection to database
     mongoose
-        .connect(DB,{
+        .connect(process.env.DB,{
             useNewUrlParser : true,
             useUnifiedTopology : true
         })

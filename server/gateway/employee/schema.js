@@ -1,26 +1,26 @@
-const {
+import {
     GraphQLNonNull,
     GraphQLString,
     GraphQLID,
     GraphQLList,
     GraphQLInt
-} = require('graphql')
+} from 'graphql';
 
-const AddType = require('./types/addType');
-const UpdateType = require('./types/updateType');
-const DeleteType = require('./types/deleteType');
-const ListType = require('./types/listType');
-const HistoryType = require('./types/historyType')
-const SlipSharedType = require('./types/slipSharedType')
+import { AddType } from './types/addType';
+import { UpdateType } from './types/updateType';
+import { DeleteType } from './types/deleteType';
+import { ListType } from './types/listType';
+import  { HistoryType }  from './types/historyType';
+import { SlipSharedType } from './types/slipSharedType';
 
-const AddEmployee = require('./resolvers/addResolver');
-const UpdateEmployee = require('./resolvers/updateResolver')
-const DeleteEmployee = require('./resolvers/deleteResolver')
-const EmployeeList = require('./resolvers/listResolver')
-const EmployeeHistory = require('./resolvers/historyResolver')
-const SlipShared = require('./resolvers/slipSharedResolver')
+import { AddEmployee } from './resolvers/addResolver';
+import { UpdateEmployee } from './resolvers/updateResolver';
+import { DeleteEmployee } from './resolvers/deleteResolver';
+import { EmployeeList } from './resolvers/listResolver';
+import { EmployeeHistory } from './resolvers/historyResolver';
+import { SlipShared } from './resolvers/slipSharedResolver';
 
-const employeeQuery = {
+export const employeeQuery = {
     employeeList : {
         type : new GraphQLList(ListType),
         args : {
@@ -37,7 +37,7 @@ const employeeQuery = {
     }
 }
 
-const employeeMutation = {
+export const employeeMutation = {
     addEmployee : {
         type: AddType,
         description: "New user employee created",
@@ -83,5 +83,3 @@ const employeeMutation = {
         resolve : SlipShared
     }
 }
-
-module.exports = { employeeQuery,employeeMutation }

@@ -1,8 +1,8 @@
-const { GraphQLObjectType,GraphQLSchema} = require('graphql');
-const { userQuery,userMutation }  = require('./server/gateway/user/schema');
-const { contactQuery,contactMutation } = require('./server/gateway/contact/schema')
-const { employeeQuery,employeeMutation } = require('./server/gateway/employee/schema')
-const tokenValidation = require('./server/services/middleware/tokenValidation');
+import  { GraphQLObjectType,GraphQLSchema} from 'graphql';
+import { userQuery,userMutation } from './server/gateway/user/schema';
+import  { contactQuery,contactMutation } from './server/gateway/contact/schema'
+import { employeeQuery,employeeMutation } from './server/gateway/employee/schema'
+import { context } from './server/services/middleware/context'
 
 const query = new GraphQLObjectType({
     name: 'Query',
@@ -22,31 +22,9 @@ const mutation = new GraphQLObjectType({
     })
 })
 
-const context = async({req}) => {
-    // verify user identify
-    if(req.headers && req.headers.authorization){
-        const auth = req.headers.authorization;
-        const parts = auth.split(" ");
-        const bearer = parts[0];
-        const token = parts[1];
-
-        if(bearer == 'Bearer'){
-            const user = await tokenValidation(token);
-            if(user.error){
-                throw Error(user.msg)
-            }else return{ user }
-        }else{
-            throw Error('Authentication must use Bearer')
-        }
-    } else{
-        throw Error("User must be authenticated")
-    }
-}
-
-const schema = new GraphQLSchema({
+export const schema = new GraphQLSchema({
     query,
     mutation,
     context
 })
 
-module.exports = schema;

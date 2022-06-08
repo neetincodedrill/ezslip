@@ -1,9 +1,9 @@
-const User = require('./user');
-const Employee = require('./employee')
+import User from './user';
+import Employee from './employee'
+import SalaryComponent from './salaryComponent'
 
-const models = {
+export const model = {
     User,
-    Employee
+    Employee,
+    SalaryComponent
 }
-
-module.exports = models;

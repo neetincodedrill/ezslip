@@ -1,11 +1,10 @@
-const { GraphQLNonNull,GraphQLString} = require('graphql');
+import { GraphQLNonNull,GraphQLString} from 'graphql';
+import  { ContactType } from './types/contactType';
+import { Contact } from './resolvers/contact'
 
-const ContactType = require('./types/contactType');
-const Contact = require('./resolvers/contact')
+export const contactQuery = {}
 
-const contactQuery = {}
-
-const contactMutation = {
+export const contactMutation = {
     contact : {
         type : ContactType,
         description : 'Any user contact to admin',
@@ -19,5 +18,3 @@ const contactMutation = {
         resolve : Contact
     }
 }
-
-module.exports = { contactMutation,contactQuery }

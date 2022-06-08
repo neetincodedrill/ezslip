@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const EmployeeSchema = new mongoose.Schema({
     userId : {
         type : String,
@@ -35,6 +35,4 @@ const EmployeeSchema = new mongoose.Schema({
     timestamps : true
 })
 
-const Employee = mongoose.model('Employee',EmployeeSchema)
-
-module.exports = Employee
+export const Employee = mongoose.model('Employee',EmployeeSchema)

@@ -1,6 +1,6 @@
-const { GraphQLObjectType,GraphQLNonNull,GraphQLString} = require('graphql');
+import { GraphQLObjectType,GraphQLNonNull,GraphQLString} from 'graphql';
 
-const SignUpType = new GraphQLObjectType({
+export const SignUpType = new GraphQLObjectType({
     name: "SignUp",
     description: "New user sign in",
     fields: () => ({
@@ -9,5 +9,3 @@ const SignUpType = new GraphQLObjectType({
         }
     })
 })
-
-module.exports = SignUpType

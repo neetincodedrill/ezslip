@@ -1,6 +1,6 @@
-const model = require("../../../database/model");
+import { model } from "../../../database/model";
 
-const GetUser = async(_,args) => {
+export const GetUser = async(_,args) => {
     const user = await model.User.findById(args.id)
     return {
         name : user.name,
@@ -9,5 +9,3 @@ const GetUser = async(_,args) => {
         contact_number : user.contactNumber,
     }
 }
-
-module.exports = GetUser

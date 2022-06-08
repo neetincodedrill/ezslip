@@ -1,10 +1,9 @@
-const model = require("../../../database/model");
-const CryptoJS = require("crypto-js");
-const { ENCRYPT_KEY } = process.env
+import { model } from "../../../database/model";
+import CryptoJS from "crypto-js";
+const User = model.User;
 
-const UserVerification = async(_,args) => {
+export const UserVerification = async(_,args) => {
     const verification_id = args.verificationId;
-
     //Split the string into an array
     var splitString = verification_id.split('_');
     
@@ -13,10 +12,10 @@ const UserVerification = async(_,args) => {
     const currentTime = new Date().getTime()
      
     // Decrypt
-    const bytes  = CryptoJS.AES.decrypt(hashId,ENCRYPT_KEY);
+    const bytes  = CryptoJS.AES.decrypt(hashId,process.env.ENCRYPT_KEY);
     const id = bytes.toString(CryptoJS.enc.Utf8);
     
-    const user = await model.User.findById(id)
+    const user = await User.findById(id)
     if(!user)return { message : 'User does not exits'}
     if(expireTime > currentTime){
         return {
@@ -27,7 +26,5 @@ const UserVerification = async(_,args) => {
             message : "User verification time expired"
         }
     }
-
 }
 
-module.exports = UserVerification
