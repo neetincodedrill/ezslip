@@ -1,6 +1,5 @@
-import { model } from "../../../database/model";
+import { User } from "../../../database/model/user";
 import CryptoJS from "crypto-js";
-const User = model.User;
 
 export const UserVerification = async(_,args) => {
     const verification_id = args.verificationId;
@@ -18,7 +17,9 @@ export const UserVerification = async(_,args) => {
     const user = await User.findById(id)
     if(!user)return { message : 'User does not exits'}
     if(expireTime > currentTime){
+        await User.findByIdAndUpdate({_id : id}, { $set : { isVerified : true}})
         return {
+            id : user._id,
             message : "User verified"
         }
     }else{

@@ -42,13 +42,12 @@ export const employeeMutation = {
         type: AddType,
         description: "New user employee created",
         args : {
-            userId: { type: new GraphQLNonNull(GraphQLID)},
             firstName: { type: new GraphQLNonNull(GraphQLString)},
             lastName: { type: new GraphQLNonNull(GraphQLString)},
-            employeeCode : { type: new GraphQLNonNull(GraphQLInt)},
+            employeeCode : { type: new GraphQLNonNull(GraphQLString)},
             designation: { type:new GraphQLNonNull(GraphQLString)},
             panNumber: { type: new GraphQLNonNull(GraphQLString)},
-            salary: { type: new GraphQLNonNull(GraphQLInt)},
+            salary: { type: new GraphQLNonNull(GraphQLString)},
         },
         resolve : AddEmployee
     },
@@ -56,13 +55,13 @@ export const employeeMutation = {
         type: UpdateType,
         description: "User employee updated",
         args : {
-            userId: { type: new GraphQLNonNull(GraphQLID)},
+            id : { type: new GraphQLNonNull(GraphQLID)},
             firstName:{ type: GraphQLString },
             lastName: { type: GraphQLString },
-            employeeCode : { type: GraphQLInt },
+            employeeCode : { type: GraphQLString },
             designation:{ type: GraphQLString },
             panNumber:{ type: GraphQLString },
-            salary: { type: GraphQLInt },
+            salary: { type: GraphQLString },
         },
         resolve : UpdateEmployee
     },
@@ -70,7 +69,7 @@ export const employeeMutation = {
         type: DeleteType,
         description: "User employee deleted",
         args : {
-            userId: { type: new GraphQLNonNull(GraphQLID)},
+            id: { type: new GraphQLNonNull(GraphQLID)},
         },
         resolve : DeleteEmployee
     },

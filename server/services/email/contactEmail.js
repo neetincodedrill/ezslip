@@ -11,14 +11,14 @@ export const contactEmail = async(user) => {
     const templateData = await contactTemplate(name,organization_name,email,contact_number,details);
     
     //step 1
-    var transporter= nodemailer.createTransport(
-        {
-        service:'gmail',
-        auth:
-        {
-        user: process.env.user_email,
-        pass: process.env.user_password
-        }
+    var transporter= nodemailer.createTransport({
+        host: 'smtppro.zoho.in',
+        port: '465',
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: process.env.user_email,
+            pass: process.env.user_password
+        },
     });
 
     //step 2

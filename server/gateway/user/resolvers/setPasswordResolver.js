@@ -1,5 +1,5 @@
-import { model } from "../../../database/model";
-import passwordValidate from '../Error/passwordValidate';
+import { User } from "../../../database/model/user";
+import { passwordValidate } from '../Error/passwordValidate';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 
@@ -9,21 +9,21 @@ export const SetPassword = async(_,args) => {
   
     if(validationResponse === true){
       try{      
-        const user = await model.User.findById(args.id)
+        const user = await User.findById(args.id)
+        if(!user.isVerified) return { message : "User not verified" }
         if(user){
           //hash password        
           const hashPassword = await bcrypt.hash(password,10);
-          await model.User.findByIdAndUpdate(
+          await User.findByIdAndUpdate(
             {_id: args.id },
             {
               $set:{
                   password : hashPassword,
-                  isVerified : true,
                   isActivated : true
               },
             }
           );
-          const token =  jwt.sign({ id : user._id},JWT_SECRET,{expiresIn: "1d"});
+          const token =  jwt.sign({ id : user._id},process.env.JWT_SECRET,{expiresIn: "1d"});
         return {
           token: token,
           id : user._id

@@ -1,7 +1,7 @@
-import { model } from "../../../database/model";
+import { Employee } from "../../../database/model/employee";
 
 export const UpdateEmployee = async(_,args,context) => {
-    await model.Employee.findByIdAndUpdate(
+    await Employee.findByIdAndUpdate(
         {_id: args.id },
         {
           $set:args

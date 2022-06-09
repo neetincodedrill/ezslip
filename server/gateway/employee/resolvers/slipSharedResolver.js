@@ -1,10 +1,10 @@
-import { model } from "../../../database/model"
+import { Employee } from "../../../database/model/employee";
 
 export const SlipShared = async(_,args,context) => {
     const todayDate = new Date();
-    const dd = todayDate.getDate();
-    const mm = todayDate.getMonth()+1; 
-    const yyyy = todayDate.getFullYear();
+    var dd = todayDate.getDate();
+    var mm = todayDate.getMonth()+1;  
+    var yyyy = todayDate.getFullYear();
     if(dd<10) 
     {
         dd='0'+dd;
@@ -15,7 +15,8 @@ export const SlipShared = async(_,args,context) => {
         mm='0'+mm;
     }
     const date = dd+'/'+mm+'/'+yyyy;
-    await model.Employee.findByIdAndUpdate(
+    console.log(date)
+    await Employee.findByIdAndUpdate(
         { _id  : args.id },
         {
             $set : {

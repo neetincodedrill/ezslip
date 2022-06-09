@@ -1,4 +1,4 @@
-import  tokenValidation from './tokenValidation';
+import  { tokenValidation } from './tokenValidation';
 
 export const context = async({req}) => {
     // verify user identify
@@ -12,7 +12,10 @@ export const context = async({req}) => {
             const user = await tokenValidation(token);
             if(user.error){
                 throw Error(user.msg)
-            }else return{ user }
+            }else{
+                req.user = user
+                return req.user
+            }  
         }else{
             throw Error('Authentication must use Bearer')
         }

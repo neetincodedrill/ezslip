@@ -5,14 +5,14 @@ export const sendSignUpEmail = async(email) => {
     const url = 'https://blog.pusher.com/handling-authentication-in-graphql-jwt/'
     const templateData =  signUpTemplate(url);
         //step 1
-    var transporter= nodemailer.createTransport(
-        {
-        service:'gmail',
-        auth:
-        {
-        user: process.env.user_email,
-        pass: process.env.user_password
-        }
+    var transporter= nodemailer.createTransport({
+        host: 'smtppro.zoho.in',
+        port: '465',
+        secure: true, // true for 465, false for other ports
+        auth: {
+            user: process.env.user_email,
+            pass: process.env.user_password
+        },
     });
 
     //step 2
@@ -25,7 +25,6 @@ export const sendSignUpEmail = async(email) => {
 
     //step 3  
     const emailSend =  await transporter.sendMail(mailOptions)
-    console.log(emailSend)
     if(!emailSend){
         return {
             successMessage: 'Technical Issue!, Please click on resend for verify your Email.',

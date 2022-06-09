@@ -1,7 +1,9 @@
-import { model } from "../../../database/model"
+import { Employee } from "../../../database/model/employee";
 
 export const EmployeeHistory = async(_,args,context) => {
-    const employeeId = args.id;
-    const employeeList = await model.Employee({userId: employeeId,employeeStatus:true})
+
+    const id = args.id;
+    const employeeList = await Employee.find({userId: id,employeeStatus:true})
     return employeeList
+    
 }

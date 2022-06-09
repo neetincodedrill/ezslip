@@ -6,9 +6,9 @@ export const ListType = new GraphQLObjectType({
     fields: () => ({
         firstName : { type: new GraphQLNonNull(GraphQLString)},
         lastName : { type: new GraphQLNonNull(GraphQLString)},
-        employeeCode: { type: new GraphQLNonNull(GraphQLInt)},
+        employeeCode: { type: new GraphQLNonNull(GraphQLString)},
         designation : { type: new GraphQLNonNull(GraphQLString)},
-        salary : { type: new GraphQLNonNull(GraphQLInt)},
+        salary : { type: new GraphQLNonNull(GraphQLString)},
     })
 })
 

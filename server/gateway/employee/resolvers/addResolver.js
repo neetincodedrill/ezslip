@@ -1,11 +1,11 @@
-import { model } from "../../../database/model";
-const Employee = model.Employee;
+import { Employee } from "../../../database/model/employee";
 
 export const AddEmployee = async(_,args,context) => {
-    const userId = context.user;
+    // const userId = context.user;
+    const id = "62a19263e0f250f7e5d7a195"
 
     const employee = new Employee({
-        userId : userId,
+    
         firstName : args.firstName,
         lastName : args.lastName,
         employeeCode : args.employeeCode,
@@ -15,13 +15,12 @@ export const AddEmployee = async(_,args,context) => {
     });
 
     try{
-        const employeeCodeExist = await model.User.findOne({ employeeCode: args.employeeCode });
-        if(employeeCodeExist) return { message : "Employee With employee Id already exits! "}
         const user = await employee.save();
-        await userEmployee.findByIdAndUpdate(
+        await Employee.findByIdAndUpdate(
             {_id : user._id},
             {
               $set:{
+                  userId : id,
                   employeeStatus : true
               }
             }

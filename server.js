@@ -3,9 +3,10 @@ require('dotenv').config();
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
 import { context } from './server/services/middleware/context'
-import { image_upload } from './server/services/rest_api/imageController'
+import { image_upload,signup_post } from './server/services/rest_api/imageController'
 //graphql schema
 import { schema } from "./schema"
+
 
 //define the express
 const app = express();
@@ -21,14 +22,10 @@ require("./server/database").connect();
 const { PORT } = process.env;
 const port = process.env.port || PORT;
 
-//image upload rest_api
-app.post('/imagePost',context,image_upload)
-
-
-
 //create an instance of apollo-server-request
 const server = new ApolloServer({
-    schema
+    schema,
+    context
 })
 
 server.start().then(res => {

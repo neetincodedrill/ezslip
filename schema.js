@@ -2,7 +2,7 @@ import  { GraphQLObjectType,GraphQLSchema} from 'graphql';
 import { userQuery,userMutation } from './server/gateway/user/schema';
 import  { contactQuery,contactMutation } from './server/gateway/contact/schema'
 import { employeeQuery,employeeMutation } from './server/gateway/employee/schema'
-import { context } from './server/services/middleware/context'
+
 
 const query = new GraphQLObjectType({
     name: 'Query',
@@ -24,7 +24,6 @@ const mutation = new GraphQLObjectType({
 
 export const schema = new GraphQLSchema({
     query,
-    mutation,
-    context
+    mutation
 })
 
