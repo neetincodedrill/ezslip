@@ -1,33 +1,54 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'; 
+
 const EmployeeSchema = new mongoose.Schema({
-    userId : {
-        type : String,
+    userId : { 
+        type  :  mongoose.Schema.ObjectId,
     },
-    firstName : {
-        type : String,
+    firstName : { 
+        type : String 
     },
-    lastName : {
-        type : String,
+    lastName : { 
+        type : String 
     },
     employeeCode : { 
-        type: String
+        type: String 
     },
     designation : { 
-        type :String
+        type :String 
     },
-    panNumber : { 
-        type :String
+    PAN : { 
+        type :String 
     },
     salary : { 
-        type : String
+        type : String 
+    },
+    DOB : { 
+        type : Date 
+    },
+    DOJ : { 
+        type : Date 
+    },
+    EPF : { 
+        isEnabled : { 
+            type : Boolean 
+        },
+        number : { 
+            type : String 
+        }
+    },
+    ESI :{ 
+        isEnabled : { 
+            type : Boolean 
+        },
+        number : { 
+            type : String
+        }
     },
     employeeStatus : {
        type :Boolean,
        default: false
     },
-    slipShared: {
-        type : String,
-    }
+    slipShared: { type : String }
 },{
     timestamps : true
 })

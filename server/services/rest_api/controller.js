@@ -1,6 +1,6 @@
 
 import { User } from "../../database/model/user";
-import { Salary } from '../../database/model/salaryComponent'
+import { OrganizationDetails } from '../../database/model/organizationDetails'
 import multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -56,13 +56,13 @@ export const authController = async(req,res) => {
                 address : req.body.address
               }
             })
-            const managment = new Salary({
+            const managment = new OrganizationDetails({
               userId : id,
-              DA : req.body.DA,
-              CA : req.body.CA,
+              basicSalary : req.body.basicSalary,
               HRA : req.body.HRA,
-              specialAllowance : req.body.specialAllowance,
-              EPF : req.body.EPF
+              CIN : req.body.CIN,
+              EPF : req.body.EPF,
+              ESI : req.body.ESI,
             })
             await managment.save();
             return  res.status(201).json('User collection updated')
