@@ -15,7 +15,13 @@ export const SlipShared = async(_,args,context) => {
         mm='0'+mm;
     }
     const date = dd+'/'+mm+'/'+yyyy;
-    console.log(date)
+    if(context.message){
+        return{
+            message : context.message
+        }
+    }else if(context.user.error){
+        return { message : context.user.message}
+    }else{
     await Employee.findByIdAndUpdate(
         { _id  : args.id },
         {
@@ -26,5 +32,5 @@ export const SlipShared = async(_,args,context) => {
     )
     return {
         message :  'Employee slip shared' 
-    }
+    }}
 }

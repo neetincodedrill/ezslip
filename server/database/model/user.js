@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema({
     organizationImage:{
         type:String,
     },
-    organisationLegalName: {
+    organizationLegalName: {
         type: String,
     },
     organizationType: {

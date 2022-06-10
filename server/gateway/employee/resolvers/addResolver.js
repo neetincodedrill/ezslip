@@ -1,34 +1,31 @@
 import { Employee } from "../../../database/model/employee";
 
 export const AddEmployee = async(_,args,context) => {
-    // const userId = context.user;
-    const id = "62a19263e0f250f7e5d7a195"
-
-    const employee = new Employee({
-    
-        firstName : args.firstName,
-        lastName : args.lastName,
-        employeeCode : args.employeeCode,
-        designation : args.designation,
-        panNumber : args.panNumber,
-        salary : args.salary,
-    });
-
-    try{
-        const user = await employee.save();
-        await Employee.findByIdAndUpdate(
-            {_id : user._id},
-            {
-              $set:{
-                  userId : id,
-                  employeeStatus : true
-              }
-            }
-            )
+    const id = context.user.id
+    if(context.message){
         return{
-            message : "New Employee created"
+            message : context.message
         }
-    }catch(error){
-       throw new Error(error);
+    }else if(context.user.error){
+        return { message : context.user.message}
+    }else{
+        try{
+            const employee = new Employee({
+                userId : id,
+                firstName : args.firstName,
+                lastName : args.lastName,
+                employeeCode : args.employeeCode,
+                designation : args.designation,
+                panNumber : args.panNumber,
+                salary : args.salary,
+                employeeStatus : true
+            });
+            await employee.save();
+            return{
+                message : "New Employee created"
+            }
+        }catch(error){
+        throw new Error(error);
+        }
     }
 }

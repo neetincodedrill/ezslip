@@ -3,11 +3,12 @@ import jwt from 'jsonwebtoken'
 export const tokenValidation = async(token) => {
     if(token){
         try{
-           return  jwt.verify(token,process.env.JWT_SECRET)
+            const verify  = jwt.verify(token,process.env.JWT_SECRET)
+           return  verify
         }catch(err){
            return {
                error : true,
-               message : 'Session Invalid'
+               message : 'Token Invalid'
            }
         }
     }

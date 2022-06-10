@@ -23,16 +23,10 @@ import { SlipShared } from './resolvers/slipSharedResolver';
 export const employeeQuery = {
     employeeList : {
         type : new GraphQLList(ListType),
-        args : {
-            id : { type: new GraphQLNonNull(GraphQLID)}
-        },
         resolve : EmployeeList
     },
     employeeHistory : {
         type : new GraphQLList(HistoryType),
-        args : {
-            id : { type: new GraphQLNonNull(GraphQLID)}
-        },
         resolve : EmployeeHistory
     }
 }

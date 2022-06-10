@@ -23,7 +23,7 @@ export const SetPassword = async(_,args) => {
               },
             }
           );
-          const token =  jwt.sign({ id : user._id},process.env.JWT_SECRET,{expiresIn: "1d"});
+          const token =  jwt.sign({ id : user._id},process.env.JWT_SECRET,{  expiresIn: "8h"});
         return {
           token: token,
           id : user._id

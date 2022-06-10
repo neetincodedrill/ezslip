@@ -18,7 +18,7 @@ export const Login = async(_,args) => {
             message : 'Password is incorrect'
         }
     }
-    const token =  jwt.sign({id : user._id},process.env.JWT_SECRET,{ expiresIn: "1d" });
+    const token =  jwt.sign({id : user._id},process.env.JWT_SECRET,{   expiresIn: '1h' });
     return {
         id : user._id,
         token : token

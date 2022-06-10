@@ -1,26 +1,20 @@
-import  { tokenValidation } from './tokenValidation';
+import jwt from 'jsonwebtoken';
+import { User } from "../../database/model/user";
 
-export const context = async({req}) => {
-    // verify user identify
-    if(req.headers && req.headers.authorization){
-        const auth = req.headers.authorization;
-        const parts = auth.split(" ");
-        const bearer = parts[0];
-        const token = parts[1];
-
-        if(bearer == 'Bearer'){
-            const user = await tokenValidation(token);
-            if(user.error){
-                throw Error(user.msg)
-            }else{
-                req.user = user
-                return req.user
-            }  
-        }else{
-            throw Error('Authentication must use Bearer')
-        }
-    } else{
-        throw Error("User must be authenticated")
+export const  context = async(req,res,next) => {
+    const token =  req.headers.authorization;
+  
+    //check json web token exits and its verified
+    if(!token) return res.status(403).send('A token is required for authentication')
+    try{
+        const decode = jwt.verify(token,process.env.JWT_SECRET)
+        const user = await User.findOne({ _id : decode.id})
+        req.user = user
+    
+    }catch(error){
+        res.status(401).send('Invalid token')
     }
+    return next();
 }
+
 
