@@ -1,19 +1,13 @@
-import {
-    GraphQLNonNull,
-    GraphQLString,
-    GraphQLID,
-    GraphQLList
-} from 'graphql';
-import { GraphQLDate } from 'graphql-scalars';
+import { GraphQLNonNull,GraphQLID,GraphQLList } from 'graphql';
 
-import { AddType } from './types/addType';
-import { UpdateType } from './types/updateType';
-import { DeleteType } from './types/deleteType';
-import { ListType } from './types/listType';
-import  { HistoryType }  from './types/historyType';
-import { SlipSharedType } from './types/slipSharedType';
-import { EPFType } from './types/epfType';
-import { ESIType } from './types/esiType';
+import { AddType } from './types/AddType';
+import { UpdateType } from './types/UpdateType';
+import { DeleteType } from './types/DeleteType';
+import { ListType } from './types/ListType';
+import  { HistoryType }  from './types/HistoryType';
+import { SlipSharedType } from './types/SlipSharedType';
+import { AddEmployeeInput } from './types/AddEmployeeInput';
+import { UpdateEmployeeInput } from './types/UpdateEmployeeInput'
 
 import { AddEmployee } from './resolvers/addResolver';
 import { UpdateEmployee } from './resolvers/updateResolver';
@@ -37,34 +31,20 @@ export const employeeMutation = {
     addEmployee : {
         type: AddType,
         description: "New user employee created",
-        args : {
-            firstName: { type: new GraphQLNonNull(GraphQLString)},
-            lastName: { type: new GraphQLNonNull(GraphQLString)},
-            employeeCode : { type: new GraphQLNonNull(GraphQLString)},
-            designation: { type:new GraphQLNonNull(GraphQLString)},
-            panNumber: { type: new GraphQLNonNull(GraphQLString)},
-            salary: { type: new GraphQLNonNull(GraphQLString)},
-            dob : { type : new GraphQLNonNull(GraphQLDate)},
-            doj : { type : new GraphQLNonNull(GraphQLDate)},
-            epf: {
-                type: new GraphQLNonNull(GraphQLDate),
-              },
-        },
+        args: {
+            input: {
+              type: new GraphQLNonNull(AddEmployeeInput),
+            },
+          },
         resolve : AddEmployee
     },
     updateEmployee : {
         type: UpdateType,
         description: "User employee updated",
         args : {
-            id : { type: new GraphQLNonNull(GraphQLID)},
-            firstName:{ type: GraphQLString },
-            lastName: { type: GraphQLString },
-            employeeCode : { type: GraphQLString },
-            designation:{ type: GraphQLString },
-            panNumber:{ type: GraphQLString },
-            salary: { type: GraphQLString },
-            dob : { type : GraphQLDate},
-            doj : { type : GraphQLDate}
+            input: {
+                type: new GraphQLNonNull(UpdateEmployeeInput),
+              },
         },
         resolve : UpdateEmployee
     },

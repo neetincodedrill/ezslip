@@ -1,10 +1,13 @@
 import { GraphQLNonNull,GraphQLString,GraphQLID } from 'graphql';
 
-import { SignUpType } from './types/signUpType';
-import { SetPasswordType } from './types/setPasswordType';
-import { GetUserType } from './types/getuserType';
-import { LoginType } from './types/loginType';
-import { UserVerificationType } from './types/userVerificationType';
+import { SignUpType } from './types/SignUpType';
+import { SetPasswordType } from './types/SetPasswordType';
+import { GetUserType } from './types/GetUserType';
+import { LoginType } from './types/LoginType';
+import { UserVerificationType } from './types/UserVerificationType';
+import { LoginInput } from './types/LoginInput';
+import { SetPasswordInput } from './types/SetPasswordInput';
+import { SignUpInput } from './types/SignUpInput';
 
 import { SignUp }  from './resolvers/signUpResolver';
 import { SetPassword } from './resolvers/setPasswordResolver';
@@ -35,10 +38,9 @@ export const userMutation = {
         type: SignUpType,
         description: "New user signin",
         args : {
-            name : { type: new GraphQLNonNull(GraphQLString)},
-            organization_name: { type: new GraphQLNonNull(GraphQLString)},
-            email : { type: new GraphQLNonNull(GraphQLString)},
-            contact_number: { type:new GraphQLNonNull(GraphQLString)}
+            input: {
+                type: new GraphQLNonNull(SignUpInput),
+            },
         },
         resolve : SignUp
     },
@@ -46,8 +48,9 @@ export const userMutation = {
         type: SetPasswordType,
         description: "Set password",
         args: {
-            id : { type: new GraphQLNonNull(GraphQLID)},
-            password : { type: new GraphQLNonNull(GraphQLString)}
+            input: {
+                type: new GraphQLNonNull(SetPasswordInput),
+            },
         },
         resolve : SetPassword
     },
@@ -55,8 +58,9 @@ export const userMutation = {
         type: LoginType,
         description : 'User login',
         args: {
-            email : { type: new GraphQLNonNull(GraphQLString)},
-            password: { type: new GraphQLNonNull(GraphQLString)}
+            input: {
+                type: new GraphQLNonNull(LoginInput),
+            },
         },
         resolve : Login
     }

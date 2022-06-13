@@ -1,11 +1,12 @@
 import {Router} from  'express'
 import { context } from '../middleware/context'
-import { authController  } from './controller';
+import { postController,updateController  } from './controller';
 
 export const router = Router()
 
 
-router.post('/',context,authController)
+router.post('/post',context,postController)
+router.put('/update',context,updateController)
 
 
   

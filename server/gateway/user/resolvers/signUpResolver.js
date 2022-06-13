@@ -22,11 +22,10 @@ export const SignUp = async(_,args) => {
         const emailSend = await sendSignUpEmail(data.email,token)
         return emailSend
     }else if(data && data.isActivated){
-        return { message : 'User already exits! and activated.Please redirect to login page'}
+        return { message : 'User already exits!. Please redirect to login page'}
     }else if (data && data.isVerified && !data.isActivated){
         return { 
-            id : data._id,
-            message : 'User already verified.Please redirect to set-password page'
+            message : 'User already exits!. Please redirect to login page'
         }
     }
     else{

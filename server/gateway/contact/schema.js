@@ -1,5 +1,6 @@
-import { GraphQLNonNull,GraphQLString} from 'graphql';
+import { GraphQLNonNull} from 'graphql';
 import  { ContactType } from './types/contactType';
+import { ContactInput } from './types/ContactInput';
 import { Contact } from './resolvers/contact'
 
 export const contactQuery = {}
@@ -9,11 +10,9 @@ export const contactMutation = {
         type : ContactType,
         description : 'Any user contact to admin',
         args : {
-            name : { type: new GraphQLNonNull(GraphQLString)},
-            organization_name: { type: new GraphQLNonNull(GraphQLString)},
-            email : { type: new GraphQLNonNull(GraphQLString)},
-            contact_number : { type: new GraphQLNonNull(GraphQLString)},
-            details : { type: new GraphQLNonNull(GraphQLString)}
+           input : {
+               type : new GraphQLNonNull(ContactInput)
+           }
         },
         resolve : Contact
     }

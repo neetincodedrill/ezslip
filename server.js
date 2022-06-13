@@ -6,7 +6,6 @@ import { tokenValidation } from './server/services/middleware/tokenValidation'
 import { router } from './server/services/rest_api/route'
 import { schema } from "./schema"
 
-
 //define the express
 const app = express();
 
@@ -29,11 +28,11 @@ const server = new ApolloServer({
             const token = req.headers.authorization;
             const user =  await tokenValidation(token);	
             return { user };     
-      },
+        },
 })
 
 //rest-api
-app.use('/update',router)
+app.use('/',router)
 
 server.start().then(res => {
     //apply the apollo middleware and set its path to /api
