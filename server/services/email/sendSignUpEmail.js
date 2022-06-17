@@ -1,19 +1,17 @@
 import nodemailer from 'nodemailer';
+const nodemailerSendgrid = require('nodemailer-sendgrid');
 import { signUpTemplate } from './email-templates/signUpTemplate';
 
 export const sendSignUpEmail = async(email) => {
     const url = 'https://blog.pusher.com/handling-authentication-in-graphql-jwt/'
     const templateData =  signUpTemplate(url);
         //step 1
-    var transporter= nodemailer.createTransport({
-        host: 'smtppro.zoho.in',
-        port: '465',
-        secure: true, // true for 465, false for other ports
-        auth: {
-            user: process.env.user_email,
-            pass: process.env.user_password
-        },
-    });
+
+    const transporter = nodemailer.createTransport(
+        nodemailerSendgrid({
+            apiKey: process.env.SENDGRID_API_KEY
+        })
+    );
 
     //step 2
     var mailOptions={

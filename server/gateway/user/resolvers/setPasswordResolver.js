@@ -1,5 +1,5 @@
 import { User } from "../../../database/model/user";
-import { passwordValidate } from '../Error/passwordValidate';
+import { passwordValidate } from '../error/passwordValidate';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 
